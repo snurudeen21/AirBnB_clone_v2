@@ -73,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
                 pline = pline[2].strip()  # pline is now str
                 if pline:
                     # check for *args or **kwargs
-                    if pline[0] is '{' and pline[-1] is'}'\
+                    if pline[0] is '{' and pline[-1] is '}'\
                             and type(eval(pline)) is dict:
                         _args = pline
                     else:
@@ -115,45 +115,45 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
     """ Create an object of any class"""
-    if not args:
-        print("** class name missing **")
-        return
+        if not args:
+            print("** class name missing **")
+            return
 
-    args_list = args.split()
-    class_name = args_list[0]
-    params = args_list[1:]
+        args_list = args.split()
+        class_name = args_list[0]
+        params = args_list[1:]
 
-    if class_name not in HBNBCommand.classes:
-        print("** class doesn't exist **")
-        return
+        if class_name not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
 
-    kwargs = {}
+        kwargs = {}
 
-    for param in params:
-        key_value = param.split('=')
-        if len(key_value) != 2:
-            continue
-        key, value = key_value
+        for param in params:
+            key_value = param.split('=')
+            if len(key_value) != 2:
+                continue
+            key, value = key_value
 
-        key = key.replace('_', ' ')
+            key = key.replace('_', ' ')
 
-        if value.startswith('"') and value.endswith('"'):
-            value = value[1:-1].replace('\\"', '"')
+            if value.startswith('"') and value.endswith('"'):
+                value = value[1:-1].replace('\\"', '"')
 
-        try:
-            value = float(value)
-            if value.is_integer():
-                value = int(value)
-        except ValueError:
-            pass
+            try:
+                value = float(value)
+                if value.is_integer():
+                    value = int(value)
+            except ValueError:
+                pass
 
-        kwargs[key] = value
+            kwargs[key] = value
 
-    new_instance = HBNBCommand.classes[class_name](**kwargs)
+        new_instance = HBNBCommand.classes[class_name](**kwargs)
 
-    storage.save()
+        storage.save()
 
-    print(new_instance.id)
+        print(new_instance.id)
 
     def help_create(self):
         """ Help information for the create method """
@@ -348,6 +348,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
