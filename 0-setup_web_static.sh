@@ -8,7 +8,7 @@ apt-get install -y nginx
 mkdir -p /data/web_static/releases/
 mkdir -p /data/web_static/shared/
 mkdir -p /data/web_static/releases/test/
-echo "Release test" >> /data/web_static/releases/test/index.html
+echo "ALX School" >> /data/web_static/releases/test/index.html
 # Create symlink, override if already exists
 ln -sfn /data/web_static/releases/test /data/web_static/current
 chown -R ubuntu:ubuntu /data/ 
